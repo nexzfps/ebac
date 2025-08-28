@@ -1,0 +1,63 @@
+# config.feature
+Funcionalidade: Configurar produto
+
+  Cenario: Selecionar cor, tamanho e quantidade
+    Given que o cliente acessa a página do produto
+    When o cliente seleciona uma cor
+    And o cliente seleciona um tamanho
+    And o cliente seleciona uma quantidade
+    Then o produto deve estar pronto para ser adicionado ao carrinho
+
+  Cenario: Limitar a quantidade máxima de produtos por venda
+    Dado que o cliente acessa a página do produto
+    Quando o cliente tenta adicionar mais de 10 unidades
+    Então o sistema deve exibir uma mensagem de erro
+
+  Cenario: Limpar seleção de produto
+    Dado que o cliente selecionou cor, tamanho e quantidade
+    Quando o cliente clica no botão "limpar"
+    Então todas as seleções devem voltar ao estado original
+
+# login.feature
+Funcionalidade: Login na plataforma
+
+  Cenario: Login com credenciais válidas
+    Dado que o cliente está na página de login
+    Quando o cliente insere um usuário válido
+    E o cliente insere uma senha válida
+    E clica no botão "Entrar"
+    Então o cliente deve ser redirecionado para a tela de checkout
+
+  Cenario: Login com credenciais inválidas
+    Dado que o cliente está na página de login
+    Quando o cliente insere um usuário inválido ou senha inválida
+    E clica no botão "Entrar"
+    Então o sistema deve exibir a mensagem "Usuário ou senha inválidos"
+
+# checkout.feature
+Funcionalidade: Tela de cadastro - Checkout
+
+  Cenario: Cadastro de cliente no checkout
+    Dado que o cliente está na tela de cadastro
+    Quando o cliente preenche os campos obrigatórios com "nome", "email", "endereço
+     "
+    E clica no botão "Cadastrar"
+    Então o cadastro deve ser concluído com sucesso
+
+  Exemplos:
+    | nome        | email              | endereço       |
+    | João Silva | joao@email.com    | Rua A, 123    |
+    | Maria Lima | maria@email.com   | Av. B, 456    |
+
+  Cenario: Cadastro com e-mail inválido
+    Dado que o cliente está na tela de cadastro
+    Quando o cliente insere um e-mail no formato inválido
+    E clica no botão "Cadastrar"
+    Então o sistema deve exibir uma mensagem de erro
+
+  Cenario: Cadastro com campos obrigatórios vazios
+    Dado que o cliente está na tela de cadastro
+    Quando o cliente deixa campos obrigatórios vazios
+    E clica no botão "Cadastrar"
+    Então o sistema deve exibir uma mensagem de alerta
+
